@@ -117,7 +117,7 @@ class sertifikatAdminController extends Controller
     public function pdf()
     {
         $sertifikats = sertifikat::all();
-        $pdf = PDF::loadview('dashboard.sertifikat.seminar_akademik.cetak_sertifikat', compact('sertifikats'))->setPaper('A4', 'landscape');
+        $pdf = PDF::loadview('dashboard.sertifikat.seminar_akademik.cetak_sertifikat', compact('sertifikats'))->setPaper('A1', 'landscape');
         return $pdf->download('Sertifikat.pdf');
     }
 }

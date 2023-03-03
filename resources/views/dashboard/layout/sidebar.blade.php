@@ -68,6 +68,31 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
+            {{-- pendaftaran --}}
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#kelompokbelajar"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Pendaftaran</span>
+                </a>
+                <div id="kelompokbelajar" class="collapse" aria-labelledby="headingPages"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-transparent py-2 collapse-inner rounded">
+                        <!-- Nav Item - Alumni -->
+                        <div class="nav-item @yield('kelompokbelajar')">
+                            <a class="nav-link" href="{{ route('kelompokbelajar.index') }}">
+                                <i class="fas fa-fw fa-list-ul"></i>
+                                <span>Kelompok Belajar</span></a>
+                        </div>
+
+                        <!-- Divider -->
+                        <hr class="sidebar-divider">
+                    </div>
+                </div>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+            {{-- akhir pendaftaran --}}
             <!-- Nav Item - Angkatan -->
             <li class="nav-item @yield('angkatan')">
                 <a class="nav-link" href="{{ route('angkatan.index') }}">

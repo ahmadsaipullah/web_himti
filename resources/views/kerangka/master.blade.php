@@ -56,17 +56,20 @@
                             <a class="nav-link @yield('menuKlinik')" href="{{ route('klinik') }}">Klinik</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle @yield('pendaftaran')" href="#"
+                                id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
                                 <span>Pendaftaran</span>
                             </a>
 
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item nav-link" href="#">Seminar Akademik</a></li>
-                                <li><a class="dropdown-item nav-link disabled text-muted" href="#"
-                                        aria-disabled="true">Workshop Akademik</a></li>
-                                <li><a class="dropdown-item nav-link disabled text-muted" href="#"
-                                        aria-disabled="true">Kelompok Belajar</a></li>
+                                <li><a class="dropdown-item nav-link text-muted disabled" href="#">Seminar
+                                        Akademik</a></li>
+                                <li><a class="dropdown-item nav-link disabled text-muted" href="#">Workshop
+                                        Akademik</a></li>
+                                <li><a class="dropdown-item nav-link  @yield('kelompokbelajar')"
+                                        href="{{ route('kelompok_belajar.create') }}">Kelompok
+                                        Belajar</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -81,13 +84,15 @@
                 <img src="{{ asset('assets/images/HIMTI.png') }}" height="75" width="75" alt=""
                     class="pb-2">
 
-                <p class="text-muted"><a href="mailto:himti.umt11@gmail.com">{{ $footer->email }}</a></p>
-                <p class="text-muted"><a
-                        href="https://api.whatsapp.com/send?phone={{ $footer->nomor_hp }}">{{ $footer->information }}</a>
+                <p class="text-muted"><a href="mailto:himti.umt11@gmail.com"><span class="mdi mdi-email">
+                            {{ $footer->email }}</span></a></p>
+                <p class="text-muted"><a href="https://api.whatsapp.com/send?phone={{ $footer->nomor_hp }}"><span
+                            class="mdi mdi-whatsapp
+                        "> {{ $footer->information }}</span></a>
                 </p>
                 {{-- <a href="#"><span class="mdi mdi-facebook"></span></a>
                 <a href="#"><span class="mdi mdi-twitter"></span></a> --}}
-                <a href="https://www.instagram.com/himti.umt/"><span class="mdi mdi-instagram">himtiumt</span></a>
+                <a href="https://www.instagram.com/himti.umt/"><span class="mdi mdi-instagram"> himtiumt</span></a>
                 {{-- <a href="#"><span class="mdi mdi-linkedin"></span></a> --}}
 
             </div>

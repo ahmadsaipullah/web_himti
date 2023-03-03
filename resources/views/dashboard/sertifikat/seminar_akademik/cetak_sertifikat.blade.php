@@ -61,7 +61,7 @@
 
 <body>
     @forelse ($sertifikats as $sertifikat)
-        <div class="container my-4 ">
+        <div class="container-fluid my-4 ">
             <div class="sertifikat">
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-center">

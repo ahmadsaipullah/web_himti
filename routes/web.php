@@ -1,13 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\{loginController, registerController};
-use App\Http\Controllers\Admin\{acaraController, anggotaController, artikelController, dosenController, jadwalSharingController, strukturalController, tambahAngkatanController, tambahKategoriController, dashboardController, sertifikatAdminController, alumniController, footerController, adminController};
+use App\Http\Controllers\Auth\{loginController, registerController, editPasswordController, profileController};
+use App\Http\Controllers\Admin\{acaraController, anggotaController, artikelController, dosenController, jadwalSharingController, strukturalController, tambahAngkatanController, tambahKategoriController, dashboardController, sertifikatAdminController, alumniController, footerController, adminController, kelompokBelajarController, partnershipController, tutorialController};
 use App\Http\Controllers\contentController;
-use App\Http\Controllers\editPasswordController;
-use App\Http\Controllers\partnershipController;
-use App\Http\Controllers\profileController;
-use App\Http\Controllers\tutorialController;
+use App\Http\Controllers\pendaftaranController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +51,14 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/himti-umt/detail-artikel/{artikel}', [contentController::class, 'detailArtikel'])->name('detailArtikel');
     //footer
     Route::get('/footer', [contentController::class, 'footer'])->name('footer');
+
+
+    //pendaftaran
+    // Kelompok Belajar
+    Route::get('/pendaftaran-kelompok-belajar', [pendaftaranController::class, 'create'])->name('kelompok_belajar.create');
+    Route::post('/kelompok-belajar', [pendaftaranController::class, 'store'])->name('kelompok_belajar.store');
+    Route::get('/pendaftaran/sukses/{id}', [pendaftaranController::class, 'suksesKelompokBelajar'])->name('kb-sukses');
+    // akhir pendaftaran
 });
 
 
@@ -65,9 +71,14 @@ Route::group(['middleware' => 'auth', 'PreventBackHistory'], function () {
     Route::get('/dashboard', [dashboardController::class, 'dashboard'])->name('dashboard');
     //logout
     Route::post('/logout', [loginController::class, 'logout'])->name('logout');
-
+    // update profile
+    Route::get('/profile', [profileController::class, 'index'])->name('profile.index');
+    Route::get('/profile/{profile}/edit', [profileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile/{profile}', [profileController::class, 'update'])->name('profile.update');
+    Route::get('/password/{password}/edit', [editPasswordController::class, 'edit'])->name('password.edit');
+    Route::patch('/password/{password}', [editPasswordController::class, 'update'])->name('password.update');
+    // middleware
     Route::group(['middleware' => 'adminsuper'], function () {
-
         //acara
         Route::resource('/acara', acaraController::class);
 
@@ -118,6 +129,12 @@ Route::group(['middleware' => 'auth', 'PreventBackHistory'], function () {
         Route::get('/sertifikat/{sertifikat}', [sertifikatAdminController::class, 'show'])->name('sertifikat.show');
         // Route::resource('/sertifikat', sertifikatAdminController::class);
         // akhir sertifikat
+        // kelompok belajar
+        Route::resource('/kelompokbelajar', kelompokBelajarController::class);
+        //cetak PDF
+        Route::get('/data-kelompok-belajar-pdf', [kelompokBelajarController::class, 'pdf'])->name('kelompokbelajar.pdf');
+        //cetak Excel
+        Route::get('/data-kelompok-belajar-excel', [kelompokBelajarController::class, 'excel'])->name('kelompokbelajar.excel');
         // admin
         Route::resource('/admin', adminController::class);
         // partnership
@@ -136,11 +153,3 @@ Route::group(['middleware' => 'auth', 'PreventBackHistory'], function () {
 
 
 Route::get('/sertifikat-pdf', [sertifikatAdminController::class, 'pdf'])->name('sertifikat.pdf');
-
-Route::get('/profile', [profileController::class, 'index'])->name('profile.index');
-Route::get('/profile/{profile}/edit', [profileController::class, 'edit'])->name('profile.edit');
-Route::patch('/profile/{profile}', [profileController::class, 'update'])->name('profile.update');
-
-
-Route::get('/password/{password}/edit', [editPasswordController::class, 'edit'])->name('password.edit');
-Route::patch('/password/{password}', [editPasswordController::class, 'update'])->name('password.update');
