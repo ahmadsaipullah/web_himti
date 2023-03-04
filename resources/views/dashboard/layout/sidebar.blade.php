@@ -31,20 +31,16 @@
                     <i class="fas fa-fw fa-list-ul"></i>
                     <span>Kategori</span></a>
             </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider">
-
             {{-- admin --}}
             <li class="nav-item @yield('admin')">
                 <a class="nav-link" href="{{ route('admin.index') }}">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Admin</span></a>
             </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider">
-
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#sertifikat"
                     aria-expanded="true" aria-controls="collapsePages">
@@ -53,7 +49,7 @@
                 </a>
                 <div id="sertifikat" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-transparent py-2 collapse-inner rounded">
-                        <!-- Nav Item - Alumni -->
+                        <!-- Nav Item - Sertifikat -->
                         <div class="nav-item @yield('sertifikat')">
                             <a class="nav-link" href="{{ route('sertifikat.index') }}">
                                 <i class="fas fa-fw fa-list-ul"></i>
@@ -67,7 +63,6 @@
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
-
             {{-- pendaftaran --}}
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#kelompokbelajar"
@@ -78,13 +73,12 @@
                 <div id="kelompokbelajar" class="collapse" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bg-transparent py-2 collapse-inner rounded">
-                        <!-- Nav Item - Alumni -->
+                        <!-- Nav Item - Kelompok Belajar -->
                         <div class="nav-item @yield('kelompokbelajar')">
                             <a class="nav-link" href="{{ route('kelompokbelajar.index') }}">
                                 <i class="fas fa-fw fa-list-ul"></i>
                                 <span>Kelompok Belajar</span></a>
                         </div>
-
                         <!-- Divider -->
                         <hr class="sidebar-divider">
                     </div>
@@ -101,7 +95,6 @@
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
-
             <!-- Nav Item - Tutorial -->
             <li class="nav-item @yield('tutorial')">
                 <a class="nav-link" href="{{ route('tutorial.index') }}">
@@ -110,8 +103,6 @@
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
-
-
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#data"
                     aria-expanded="true" aria-controls="collapsePages">
@@ -175,14 +166,12 @@
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
-
             <!-- Nav Item - Acara -->
             <li class="nav-item @yield('acara')">
                 <a class="nav-link" href="{{ route('acara.index') }}">
                     <i class="fas fa-fw fa-calendar"></i>
                     <span>Acara</span></a>
             </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -192,11 +181,8 @@
                     <i class="fas fa-fw fa-clipboard"></i>
                     <span>Jadwal Sharing</span></a>
             </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider">
-
-
             <!-- Nav Item - Artikel -->
             <li class="nav-item @yield('artikel')">
                 <a class="nav-link" href="{{ route('artikel.index') }}">
@@ -205,15 +191,35 @@
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
-
-            <li class="nav-item @yield('footer')">
-                <a class="nav-link" href="{{ route('footer.index') }}">
-                    <i class="fas fa-fw fa-pen"></i>
-                    <span>Footer</span></a>
+            {{-- Setting --}}
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#setting"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Setting</span>
+                </a>
+                <div id="setting" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-transparent py-2 collapse-inner rounded">
+                        <!-- Nav Item - Footer -->
+                        <div class="nav-item @yield('footer')">
+                            <a class="nav-link" href="{{ route('footer.index') }}">
+                                <i class="fas fa-fw fa-pen"></i>
+                                <span>Footer</span></a>
+                        </div>
+                        <!-- Divider -->
+                        <hr class="sidebar-divider">
+                        <div class="nav-item @yield('slider')">
+                            <a class="nav-link" href="{{ route('slider.index') }}">
+                                <i class="fas fa-fw fa-pen"></i>
+                                <span>Slider</span></a>
+                        </div>
+                        <!-- Divider -->
+                        <hr class="sidebar-divider">
+                    </div>
+                </div>
             </li>
-
             <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+            <hr class="sidebar-divider">
         @endif
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">

@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Home;
 
 use App\Models\acara;
 use App\Models\Alumni;
 use App\Models\Footer;
 use App\Models\artikel;
-use App\Models\jadwal_sharing;
-use App\Models\partnership;
-use App\Models\sertifikat;
-use App\Models\struktur_organ;
 use App\Models\tutorial;
+use App\Models\sertifikat;
+use App\Models\partnership;
+use App\Models\jadwal_sharing;
+use App\Models\struktur_organ;
+use Illuminate\Routing\Controller;
 
 class contentController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Setting;
 
 use App\Models\Footer;
 use Illuminate\Http\Request;

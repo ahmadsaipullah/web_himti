@@ -5,9 +5,41 @@
 
     {{-- banner --}}
     <div class="banner">
-        <div class="container">
+        {{-- <div class="container">
             <h1 class="font-weight-semibold">Himpunan Mahasiswa Teknik Informatika<br>Universitas Muhammadiyah Tangerang</h1>
             <img src="{{ asset('assets/images/HIMTI.png') }}" alt="" class="img-fluid" height="500" width="500">
+        </div> --}}
+        <div class="section-body">
+            <div id="carouselExampleIndicators2" class="carousel slide pointer-event" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    @for ($i = 0; $i < $slider; $i++)
+                        <li data-target="#carouselExampleIndicators2" data-slide-to="{{ $i }}"
+                            @if ($i == 0) {{ 'active' }} @endif>
+                        </li>
+                    @endfor
+                </ol>
+                <div class="carousel-inner">
+                    @foreach ($sliderr->take(3) as $slr)
+                        <div class="carousel-item @if ($loop->first) active @endif">
+                            <img class="slider d-block w-100" src="{{ asset('assets/img/slider/' . $slr->image) }}">
+                            <div class="carousel-caption d-none d-md-block">
+                                {{-- <!--<h5>{{$slr->title}}</h5>-->
+                            <!--<p>L{{$slr->deskripsi}}</p>--> --}}
+                            </div>
+                        </div>
+                    @endforeach
+
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
         </div>
     </div>
     {{-- end banner --}}

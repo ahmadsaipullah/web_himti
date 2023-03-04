@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Pendaftaran;
 
 use App\Models\Footer;
 use Illuminate\Http\Request;
 use App\Mail\kelompok_Belajar;
 use App\Models\kelompokBelajar;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Mail;
 
 class pendaftaranController extends Controller

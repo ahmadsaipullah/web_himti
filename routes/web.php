@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\{loginController, registerController, editPasswordController, profileController};
-use App\Http\Controllers\Admin\{acaraController, anggotaController, artikelController, dosenController, jadwalSharingController, strukturalController, tambahAngkatanController, tambahKategoriController, dashboardController, sertifikatAdminController, alumniController, footerController, adminController, kelompokBelajarController, partnershipController, tutorialController};
-use App\Http\Controllers\contentController;
-use App\Http\Controllers\pendaftaranController;
+use App\Http\Controllers\Admin\{acaraController, anggotaController, artikelController, dosenController, jadwalSharingController, strukturalController, tambahAngkatanController, tambahKategoriController, dashboardController, sertifikatAdminController, alumniController, adminController, kelompokBelajarController, partnershipController, tutorialController};
+use App\Http\Controllers\Home\{contentController};
+use App\Http\Controllers\Pendaftaran\{pendaftaranController};
+use App\Http\Controllers\Setting\{footerController, sliderController};
 
 
 /*
@@ -118,6 +119,8 @@ Route::group(['middleware' => 'auth', 'PreventBackHistory'], function () {
         Route::resource('/alumni', alumniController::class);
         // footer
         Route::resource('/footer', footerController::class);
+        // slider
+        Route::resource('/slider', sliderController::class);
 
         // sertifikat
         Route::get('/sertifikat', [sertifikatAdminController::class, 'index'])->name('sertifikat.index');
