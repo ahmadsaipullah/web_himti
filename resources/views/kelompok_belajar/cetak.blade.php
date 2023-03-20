@@ -45,7 +45,7 @@
                     <td>{{ $kb->kelas }}</td>
                     <td>{{ $kb->angkatan }}</td>
                     <td>{{ $kb->bidang }}</td>
-                    <td> <img src="{{ Storage::url($kb->image) }}" alt="gambar" width="50px"></td>
+                    <td><img src="{{ public_path(Storage::url($kb->image)) }}" alt="gambar" width="100px"></td>
                 </tr>
             @empty
             @endforelse

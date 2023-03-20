@@ -15,15 +15,34 @@
                         <a href="{{ route('anggota.pdf') }}" class="btn btn-danger">PDF</a>
                     </div>
                 </div>
+                {{-- search --}}
+                <div class="mb-4">
+                    <form action="{{ route('cari-anggota') }}" method="GET"
+                        class="d-none d-sm-inline-block form-inline mr-auto  my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" name="cari" value="{{ old('cari') }}"
+                                class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search"
+                                aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn bg-gradient-primary" type="submit">
+                                    <i class="fas fa-search fa-sm text-white"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                {{-- Ahkir Search --}}
                 <div class="table-responsive">
                     <table class="table table-bordered table-sm text-center">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Nama</th>
+                                <th>Email</th>
                                 <th>Nim</th>
                                 <th>No_Hp</th>
-                                <th>Email</th>
+                                <th>No_Darurat</th>
+                                <th>No_Alamat</th>
                                 <th>Id Angkatan</th>
                                 <th>Action</th>
                             </tr>
@@ -34,9 +53,11 @@
                                     <td>{{ $anggotas->firstItem() + $key }}</td>
                                     <td><a class="btn"
                                             href="{{ route('anggota.show', $anggota->id) }}">{{ $anggota->nama }}</a></td>
+                                    <td>{{ $anggota->email }}</td>
                                     <td>{{ $anggota->nim }}</td>
                                     <td>{{ $anggota->no_hp }}</td>
-                                    <td>{{ $anggota->email }}</td>
+                                    <td>{{ $anggota->no_darurat }}</td>
+                                    <td>{{ $anggota->alamat }}</td>
                                     <td>{{ $anggota->angkatan->angkatan }}</td>
                                     <td>
                                         <a href="{{ route('anggota.edit', $anggota->id) }}" class="btn btn-success btn-sm">
@@ -52,7 +73,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="text-center">Data Kosong</td>
+                                    <td colspan="9" class="text-center">Data Kosong</td>
                                 </tr>
                             @endforelse
                         </tbody>

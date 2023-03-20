@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('nim')->unique();
             $table->string('email')->unique();
             $table->string('no_hp');
+            $table->string('no_darurat');
+            $table->string('alamat');
             $table->foreignId('id_angkatan')->constrained('angkatans')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

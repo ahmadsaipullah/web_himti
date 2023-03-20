@@ -21,10 +21,11 @@
                 <div class="carousel-inner">
                     @foreach ($sliderr->take(3) as $slr)
                         <div class="carousel-item @if ($loop->first) active @endif">
-                            <img class="slider d-block w-100" src="{{ asset('assets/img/slider/' . $slr->image) }}">
+                            {{-- ukuran slider L=182,88 T=86,36 --}}
+                            <img src="{{ Storage::url($slr->image) }}" alt="gambar" class="d-block w-100">
                             <div class="carousel-caption d-none d-md-block">
-                                {{-- <!--<h5>{{$slr->title}}</h5>-->
-                            <!--<p>L{{$slr->deskripsi}}</p>--> --}}
+                                {{-- <h5>{{ $slr->title }}</h5>
+                                <p>{{ $slr->deskripsi }}</p> --}}
                             </div>
                         </div>
                     @endforeach
@@ -103,14 +104,13 @@
                             <div class="col-lg-7 col-xl-6 p-0">
                                 <p class="py-4 m-0 text-muted">
                                     <b>[{{ $item->tittle }}]</b>
-
-
                                 </p>
                                 <p class="pb-2 font-weight-medium text-muted">
                                     <b>Hari/Tanggal : {{ $item->jadwal }}
                                         <br> Jam : 13.00 s/d Selesai
                                         <br> Materi : {{ $item->tittle }}
-                                </p></b>
+                                </p>
+                                </b>
                             </div>
                         </div>
                         <div class="col-12 col-lg-5 p-0 img-digital grid-margin grid-margin-lg-0" data-aos="fade-left">

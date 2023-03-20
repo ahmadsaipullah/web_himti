@@ -22,6 +22,10 @@
                                 <th>Angkatan</th>
                                 <th>Status</th>
                                 <th>Image</th>
+                                <th>Instagram</th>
+                                <th>Twitter</th>
+                                <th>Facebook</th>
+                                <th>Linkedin</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -38,6 +42,10 @@
                                     <td>{{ $struktural->status }}</td>
                                     <td><img src="{{ Storage::url($struktural->image) }}" alt="gambar" width="150px"
                                             class="tumbnail img-fluid"></td>
+                                    <td>{{ $struktural->ig }}</td>
+                                    <td>{{ $struktural->twitter }}</td>
+                                    <td>{{ $struktural->fb }}</td>
+                                    <td>{{ $struktural->linkedin }}</td>
                                     <td>
                                         <a href="{{ route('struktural.edit', $struktural->id) }}"
                                             class="btn btn-success btn-sm">
@@ -53,7 +61,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="8" class="text-center">Data Kosong</td>
+                                    <td colspan="12" class="text-center">Data Kosong</td>
                                 </tr>
                             @endforelse
                         </tbody>

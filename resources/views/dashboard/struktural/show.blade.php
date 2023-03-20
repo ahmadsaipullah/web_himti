@@ -21,6 +21,10 @@
                                 <th>Angkatan</th>
                                 <th>Status</th>
                                 <th>Image</th>
+                                <th>Instagram</th>
+                                <th>Twitter</th>
+                                <th>Facebook</th>
+                                <th>Linkedin</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,6 +35,10 @@
                                 <td>{{ $struktural->angkatan->angkatan }}</td>
                                 <td>{{ $struktural->status }}</td>
                                 <td>{{ $struktural->image }}</td>
+                                <td>{{ $struktural->ig }}</td>
+                                <td>{{ $struktural->twitter }}</td>
+                                <td>{{ $struktural->fb }}</td>
+                                <td>{{ $struktural->linkedin }}</td>
                         </tbody>
                     </table>
                 </div>

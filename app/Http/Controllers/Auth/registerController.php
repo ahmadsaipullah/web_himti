@@ -10,13 +10,13 @@ use Illuminate\Routing\Controller;
 
 class registerController extends Controller
 {
-    public function register()
+    public function index()
     {
         $levels = level::all();
         return view('login.register', compact('levels'));
     }
 
-    public function regist(Request $request)
+    public function store(Request $request)
     {
 
         $request->validate([

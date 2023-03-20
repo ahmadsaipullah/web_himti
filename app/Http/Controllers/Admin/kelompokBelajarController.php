@@ -83,9 +83,13 @@ class kelompokBelajarController extends Controller
             $data['image'] = $request->file('image')->store('asset/kelompokbelajar', 'public');
         }
 
-        $dataId->update($data);
-        alert()->success("{$data['nama']}", 'Berhasil Di Update');
-        return to_route('kelompokbelajar.index');
+        if ($dataId->update($data)) {
+            alert()->success("{$data['nama']}", 'Berhasil Di Update');
+            return to_route('kelompokbelajar.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -97,9 +101,13 @@ class kelompokBelajarController extends Controller
     public function destroy(kelompokBelajar $kelompokbelajar)
     {
         Storage::delete('public/' . $kelompokbelajar->image);
-        $kelompokbelajar->delete();
-        alert()->success("{$kelompokbelajar['nama']}", 'Berhasil Di Hapus');
-        return back();
+        if ($kelompokbelajar->delete()) {
+            alert()->success("{$kelompokbelajar['nama']}", 'Berhasil Di Hapus');
+            return back();
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
 
@@ -108,6 +116,7 @@ class kelompokBelajarController extends Controller
         $kelompokbelajar = kelompokBelajar::all();
         $pdf = PDF::loadview('kelompok_belajar.cetak', compact('kelompokbelajar'))->setPaper('A2', 'landscape');
         return $pdf->download('Data-Kelompok-Belajar.pdf');
+        // return $pdf->stream();
     }
 
     public function excel()

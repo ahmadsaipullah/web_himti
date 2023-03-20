@@ -41,6 +41,9 @@
                             <a class="nav-link @yield('menuTentang')" href="{{ route('tentang') }}">Tentang</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link @yield('menuDosen')" href="{{ route('dosen') }}">Dosen</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link @yield('menuSharing')" href="{{ route('sharing') }}">Sharing</a>
                         </li>
                         <li class="nav-item">
@@ -84,7 +87,7 @@
                 <img src="{{ asset('assets/images/HIMTI.png') }}" height="75" width="75" alt=""
                     class="pb-2">
 
-                <p class="text-muted"><a href="mailto:himti.umt11@gmail.com"><span class="mdi mdi-email">
+                <p class="text-muted"><a href="mailto:{{ $footer->email }}"><span class="mdi mdi-email">
                             {{ $footer->email }}</span></a></p>
                 <p class="text-muted"><a href="https://api.whatsapp.com/send?phone={{ $footer->nomor_hp }}"><span
                             class="mdi mdi-whatsapp

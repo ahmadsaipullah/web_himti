@@ -38,23 +38,6 @@
                             <div class="alert alert-danger"> {{ $message }}</div>
                         @enderror
                     </div>
-                    {{-- <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" id="password"
-                            class="form-control
-                    @error('password') is invalid @enderror" required>
-                        @error('password')
-                            <div class="alert alert-danger"> {{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="verifikasi_password">Verifikasi Password</label>
-                        <input type="password" name="verifikasi_password" id="verifikasi_password"
-                            class="form-control @error('verifikasi_password') is invalid @enderror" required>
-                        @error('verifikasi_password')
-                            <div class="alert alert-danger"> {{ $message }}</div>
-                        @enderror
-                    </div> --}}
                     <div class="form-group">
                         <label for="id_level">Level</label>
                         <select class="form-control" name="id_level" id="id_level" required>
@@ -67,8 +50,15 @@
                     </div>
                     <div class="form-group">
                         <label for="image">Image</label>
-                        <img src="{{ Storage::url($admin->image) }}" alt="gambar" width="50px"
-                            class="tumbnail img-fluid">
+                        @if (Auth()->user()->image)
+                            <img src="{{ Storage::url($admin->image) }}" alt="gambar" width="50px"
+                                class="tumbnail img-fluid">
+                        @else
+                            <img alt="image" class="img-fluid tumbnail"
+                                src="{{ asset('assets/images/user_default.png') }}" width="150px"
+                                class="tumbnail img-fluid">
+                        @endif
+
                         <input type="file" name="image" id="image" class="form-control">
                     </div>
                     <button type="submit" class="btn btn-primary my-4">Simpan</button>

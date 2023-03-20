@@ -65,7 +65,7 @@
                         <input type="file" name="image" id="image" class="form-control">
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary my-4">Daftar</button>
+                        <button type="submit" class="btn btn-primary my-4" disabled>Daftar</button>
                     </div>
                 </form>
             </div>

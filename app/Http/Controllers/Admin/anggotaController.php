@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use PDF;
 use App\Models\anggota;
 use App\Models\angkatan;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
-use PDF;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AnggotaExport;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 
@@ -55,13 +56,19 @@ class anggotaController extends Controller
             'nim' => 'required|min:10|max:10|string|unique:anggotas',
             'no_hp' => 'required|min:11|max:13|string',
             'email' =>  'required|email:dns|string|unique:anggotas',
+            'no_darurat' => 'required|min:11|max:13|string',
+            'alamat' => 'required|string',
             'id_angkatan' => ''
 
         ]);
 
-        anggota::create($validasi);
-        alert()->success("{$validasi['nama']}", 'Berhasil Di Tambah');
-        return to_route('anggota.index');
+        if (anggota::create($validasi)) {
+            alert()->success("{$validasi['nama']}", 'Berhasil Di Tambah');
+            return to_route('anggota.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -103,13 +110,19 @@ class anggotaController extends Controller
             'nim' => 'required|min:10|max:10|string|unique:anggotas,nim,' . $anggotum->id,
             'no_hp' => 'required|min:11|max:13|string',
             'email' =>  'required|email:dns|string|unique:anggotas,email,' . $anggotum->id,
+            'no_darurat' => 'required|min:11|max:13|string',
+            'alamat' => 'required|string',
             'id_angkatan' => ''
 
         ]);
 
-        $anggotum->update($validasi);
-        alert()->success("{$validasi['nama']}", 'Berhasil Di Update');
-        return to_route('anggota.index');
+        if ($anggotum->update($validasi)) {
+            alert()->success("{$validasi['nama']}", 'Berhasil Di Update');
+            return to_route('anggota.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -120,9 +133,13 @@ class anggotaController extends Controller
      */
     public function destroy(anggota $anggotum)
     {
-        $anggotum->delete();
-        alert()->success("{$anggotum['nama']}", 'Berhasil Di Hapus');
-        return back();
+        if ($anggotum->delete()) {
+            alert()->success("{$anggotum['nama']}", 'Berhasil Di Hapus');
+            return back();
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
 
@@ -135,5 +152,17 @@ class anggotaController extends Controller
     public function excel()
     {
         return Excel::download(new AnggotaExport, 'Data-Anggota.xlsx');
+    }
+
+    public function cari(Request $request)
+    {
+        // menangkap data pencarian
+        $cari = $request->cari;
+        // mengambil data dari table pegawai sesuai pencarian data
+        $anggotas = anggota::with('angkatan')
+            ->where('nama', 'like', "%" . $cari . "%")
+            ->paginate();
+        // mengirim data pegawai ke view index
+        return view('dashboard.anggota.index', compact('anggotas'));
     }
 }

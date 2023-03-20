@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <h1 class="text-center">Update Struktural</h1>
                 <hr>
-                <form action="{{ route('struktural.update', $struktural->id) }}" method="POST">
+                <form action="{{ route('struktural.update', $struktural->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
                     <div class="form-group">
@@ -63,6 +63,42 @@
                         <img src="{{ Storage::url($struktural->image) }}" alt="gambar" width="50px"
                             class="tumbnail img-fluid">
                         <input type="file" name="image" id="image" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="ig">Instagram</label>
+                        <input type="text" name="ig" id="ig"
+                            class="form-control @error('ig') is invalid @enderror"
+                            value="{{ old('ig') ?? $struktural->ig }}" required>
+                        @error('ig')
+                            <div class="alert alert-danger"> {{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="twitter">Twitter</label>
+                        <input type="text" name="twitter" id="twitter"
+                            class="form-control @error('twitter') is invalid @enderror"
+                            value="{{ old('twitter') ?? $struktural->twitter }}" required>
+                        @error('twitter')
+                            <div class="alert alert-danger"> {{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="fb">Facebook</label>
+                        <input type="text" name="fb" id="fb"
+                            class="form-control @error('fb') is invalid @enderror"
+                            value="{{ old('fb') ?? $struktural->fb }}" required>
+                        @error('fb')
+                            <div class="alert alert-danger"> {{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="linkedin">Linkedin</label>
+                        <input type="text" name="linkedin" id="linkedin"
+                            class="form-control @error('linkedin') is invalid @enderror"
+                            value="{{ old('linkedin') ?? $struktural->linkedin }}" required>
+                        @error('linkedin')
+                            <div class="alert alert-danger"> {{ $message }}</div>
+                        @enderror
                     </div>
                     <button type="submit" class="btn btn-primary my-4">Simpan</button>
                 </form>

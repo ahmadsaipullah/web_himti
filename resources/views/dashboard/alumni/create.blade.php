@@ -3,7 +3,6 @@
 @section('alumni', 'active')
 @section('content')
 
-
     <div class="container bg-white">
         <div class="row">
             <div class="col-md-12">
@@ -22,8 +21,8 @@
                     <div class="form-group">
                         <label for="perusahaan">Perusahaan</label>
                         <input type="perusahaan" name="perusahaan" id="perusahaan"
-                            class="form-control summernote @error('perusahaan') is invalid @enderror"
-                            value="{{ old('perusahaan') }}" required>
+                            class="form-control @error('perusahaan') is invalid @enderror" value="{{ old('perusahaan') }}"
+                            required>
                         @error('perusahaan')
                             <div class="alert alert-danger"> {{ $message }}</div>
                         @enderror

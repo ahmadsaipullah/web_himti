@@ -11,10 +11,28 @@
                     <hr>
                     <a href="{{ route('dosen.create') }}" class="btn btn-primary">Create Dosen</a>
                     <div class="text-right my-4">
+                        <a href="{{ route('import-data.dosen') }}"class="btn btn-warning">Import</a>
                         <a href="{{ route('dosen.excel') }}" class="btn btn-success">Excel</a>
                         <a href="{{ route('dosen.pdf') }}" class="btn btn-danger">PDF</a>
                     </div>
                 </div>
+                {{-- search --}}
+                <div class="mb-4">
+                    <form action="{{ route('cari-dosen') }}" method="GET"
+                        class="d-none d-sm-inline-block form-inline mr-auto  my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" name="cari" value="{{ old('cari') }}"
+                                class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search"
+                                aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn bg-gradient-primary" type="submit">
+                                    <i class="fas fa-search fa-sm text-white"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                {{-- Ahkir Search --}}
                 <div class="table-responsive">
                     <table class="table table-bordered table-sm text-center">
                         <thead>

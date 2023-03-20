@@ -21,6 +21,10 @@ return new class extends Migration
             $table->foreignId('id_angkatan')->constrained('angkatans')->onUpdate('cascade')->onDelete('cascade');
             $table->string('status');
             $table->string('image');
+            $table->string('ig')->unique();
+            $table->string('twitter')->unique();
+            $table->string('fb')->unique();
+            $table->string('linkedin')->unique();
             $table->timestamps();
         });
     }

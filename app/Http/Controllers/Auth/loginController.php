@@ -18,7 +18,6 @@ class loginController extends Controller
     {
 
         $credentials = $request->validate([
-            'name' => '',
             'email' => ['required', 'email:dns'],
             'password' => ['required', 'min:6'],
 

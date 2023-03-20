@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\{acaraController, anggotaController, artikelContr
 use App\Http\Controllers\Home\{contentController};
 use App\Http\Controllers\Pendaftaran\{pendaftaranController};
 use App\Http\Controllers\Setting\{footerController, sliderController};
+use App\Http\Controllers\Danus\{danusSliderController, merchandiseController};
 
 
 /*
@@ -29,13 +30,16 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/login', [loginController::class, 'login'])->name('login');
 
     //register
-    Route::get('/register', [registerController::class, 'register'])->name('register');
-    Route::post('/regist', [registerController::class, 'regist'])->name('regist');
+    Route::get('/register', [registerController::class, 'index'])->name('register');
+    Route::post('/register', [registerController::class, 'store'])->name('register.store');
 
     //home
     Route::get('/', [contentController::class, 'home'])->name('home');
     //about
     Route::get('himti-umt/tentang', [contentController::class, 'tentang'])->name('tentang');
+    //dosen
+    Route::get('himti-umt/dosen', [contentController::class, 'dosen'])->name('dosen');
+    Route::get('himti-umt/cari', [contentController::class, 'cari'])->name('cari');
     //sharing
     Route::get('/himti-umt/sharing', [contentController::class, 'sharing'])->name('sharing');
     //tutorial
@@ -91,6 +95,7 @@ Route::group(['middleware' => 'auth', 'PreventBackHistory'], function () {
 
         //anggota
         Route::resource('/anggota', anggotaController::class);
+        Route::get('/cari-anggota', [anggotaController::class, 'cari'])->name('cari-anggota');
         //cetak PDF
         Route::get('/data-anggota-pdf', [anggotaController::class, 'pdf'])->name('anggota.pdf');
         //cetak Excel
@@ -108,6 +113,11 @@ Route::group(['middleware' => 'auth', 'PreventBackHistory'], function () {
 
         //dosen
         Route::resource('/dosen', dosenController::class);
+        // searvh
+        Route::get('/cari-dosen', [dosenController::class, 'cari'])->name('cari-dosen');
+        // import dosen
+        Route::get('/import-dosen', [dosenController::class, 'importdosen'])->name('import-dosen');
+        Route::get('/import-data-dosen', [dosenController::class, 'datadosen'])->name('import-data.dosen');
         //cetak PDF
         Route::get('/data-dosen-pdf', [dosenController::class, 'pdf'])->name('dosen.pdf');
         //cetak Excel
@@ -115,10 +125,14 @@ Route::group(['middleware' => 'auth', 'PreventBackHistory'], function () {
 
         //about
         Route::resource('/struktural', strukturalController::class);
+
         // alumni
         Route::resource('/alumni', alumniController::class);
+        Route::get('/cari-alumni', [alumniController::class, 'cari'])->name('cari-alumni');
+
         // footer
         Route::resource('/footer', footerController::class);
+
         // slider
         Route::resource('/slider', sliderController::class);
 
@@ -138,21 +152,31 @@ Route::group(['middleware' => 'auth', 'PreventBackHistory'], function () {
         Route::get('/data-kelompok-belajar-pdf', [kelompokBelajarController::class, 'pdf'])->name('kelompokbelajar.pdf');
         //cetak Excel
         Route::get('/data-kelompok-belajar-excel', [kelompokBelajarController::class, 'excel'])->name('kelompokbelajar.excel');
+
         // admin
         Route::resource('/admin', adminController::class);
+
         // partnership
         Route::resource('/partnership', partnershipController::class);
+
         // Tutorial
         Route::resource('/tutorial', tutorialController::class);
+
+        //danus
+        Route::resource('/danus-slider', danusSliderController::class);
+        Route::resource('/danus-merchandise', merchandiseController::class);
     });
 
     Route::group(['middleware' => 'admin'], function () {
     });
 
     Route::group(['middleware' => 'user'], function () {
+        //danus
+        Route::resource('/danus-slider', danusSliderController::class);
+        Route::resource('/danus-merchandise', merchandiseController::class);
     });
 });
 
 
 
-Route::get('/sertifikat-pdf', [sertifikatAdminController::class, 'pdf'])->name('sertifikat.pdf');
+Route::get('/sertifikat-pdf-download/{id}', [sertifikatAdminController::class, 'pdf'])->name('sertif-download');

@@ -36,9 +36,12 @@ class profileController extends Controller
             $data['image'] = $request->file('image')->store('asset/admin', 'public');
         }
 
-        $dataId->update($data);
-
-        alert()->success('Success', 'Selamat Anda Berhasil Mengupdate Profile');
-        return to_route('profile.index');
+        if ($dataId->update($data)) {
+            alert()->success('Success', 'Selamat Anda Berhasil Mengupdate Profile');
+            return to_route('profile.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 }

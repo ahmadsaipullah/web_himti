@@ -10,7 +10,7 @@ class struktur_organ extends Model
     use HasFactory;
 
     protected $table = 'struktur_organs';
-    protected $fillable = ['nama', 'nim', 'jabatan', 'id_angkatan', 'status', 'image'];
+    protected $fillable = ['nama', 'nim', 'jabatan', 'id_angkatan', 'status', 'image', 'ig', 'twitter', 'fb', 'linkedin'];
 
 
 

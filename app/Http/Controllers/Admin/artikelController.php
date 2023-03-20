@@ -56,9 +56,13 @@ class artikelController extends Controller
         $data = $request->all();
         $data['image'] = $request->file('image')->store('asset/artikel', 'public');
 
-        artikel::create($data);
-        alert()->success("{$data['tittle']}", 'Berhasil Di Tambah');
-        return to_route('artikel.index');
+        if (artikel::create($data)) {
+            alert()->success("{$data['tittle']}", 'Berhasil Di Tambah');
+            return to_route('artikel.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -101,9 +105,13 @@ class artikelController extends Controller
             $data['image'] = $request->file('image')->store('asset/artikel', 'public');
         }
 
-        $dataId->update($data);
-        alert()->success("{$artikel['tittle']}", 'Berhasil Di Update');
-        return to_route('artikel.index');
+        if ($dataId->update($data)) {
+            alert()->success("{$artikel['tittle']}", 'Berhasil Di Update');
+            return to_route('artikel.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -115,8 +123,12 @@ class artikelController extends Controller
     public function destroy(artikel $artikel)
     {
         Storage::delete('public/' . $artikel->image);
-        $artikel->delete();
-        alert()->success("{$artikel['tittle']}", 'Berhasil Di Hapus');
-        return back();
+        if ($artikel->delete()) {
+            alert()->success("{$artikel['tittle']}", 'Berhasil Di Hapus');
+            return back();
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 }

@@ -12,7 +12,7 @@ class adminController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('adminsuper');
     }
     /**
      * Display a listing of the resource.
@@ -70,10 +70,13 @@ class adminController extends Controller
 
         $data['image'] = $request->file('image')->store('asset/admin', 'public');
 
-        User::create($data);
-
-        alert()->success('Success', 'Selamat Anda Berhasil Menambah Admin');
-        return to_route('admin.index');
+        if (User::create($data)) {
+            alert()->success('Success', 'Selamat Anda Berhasil Menambah Admin');
+            return to_route('admin.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -116,10 +119,13 @@ class adminController extends Controller
             $data['image'] = $request->file('image')->store('asset/admin', 'public');
         }
 
-        $dataId->update($data);
-
-        alert()->success('Success', 'Selamat Anda Berhasil Mengupdate Admin');
-        return to_route('admin.index');
+        if ($dataId->update($data)) {
+            alert()->success('Success', 'Selamat Anda Berhasil Mengupdate Admin');
+            return to_route('admin.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -131,8 +137,12 @@ class adminController extends Controller
     public function destroy(User $admin)
     {
         Storage::delete('public/' . $admin->image);
-        $admin->delete();
-        alert()->success("{$admin['name']}", 'Berhasil Di Hapus');
-        return back();
+        if ($admin->delete()) {
+            alert()->success("{$admin['name']}", 'Berhasil Di Hapus');
+            return back();
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 }

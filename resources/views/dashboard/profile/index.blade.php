@@ -28,8 +28,14 @@
             <div class="card author-box card-dark">
                 <div class="card-body row">
                     <div class="author-box-left col-md-5">
-                        <img alt="image" class="img-fluid img-profile" src="{{ Storage::url(Auth()->user()->image) }}"
-                            style="width: 250px; height: 250px;">
+                        @if (Auth()->user()->image)
+                            <img alt="image" class="img-fluid img-profile"
+                                src="{{ Storage::url(Auth()->user()->image) }}" style="width: 250px; height: 250px;">
+                        @else
+                            <img alt="image" class="img-fluid img-profile"
+                                src="{{ asset('assets/images/user_default.png') }}" style="width: 250px; height: 250px;">
+                        @endif
+
                         <div class="clearfix"></div>
                     </div>
                     <div class="author-box-details col-md-7">

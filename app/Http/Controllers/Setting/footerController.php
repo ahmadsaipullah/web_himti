@@ -51,9 +51,13 @@ class footerController extends Controller
             'copyright' => 'required|string'
         ]);
 
-        $footer->update($validasi);
-        alert()->success('Footer Berhasil Di Update');
-        return to_route('footer.index');
+        if ($footer->update($validasi)) {
+            alert()->success('Footer Berhasil Di Update');
+            return to_route('footer.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**

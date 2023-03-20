@@ -62,6 +62,40 @@
                             <div class="alert alert-danger"> {{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="form-group">
+                        <label for="ig">Instagram</label>
+                        <input type="text" name="ig" id="ig"
+                            class="form-control @error('ig') is invalid @enderror" value="{{ old('ig') }}" required>
+                        @error('ig')
+                            <div class="alert alert-danger"> {{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="twitter">Twitter</label>
+                        <input type="text" name="twitter" id="twitter"
+                            class="form-control @error('twitter') is invalid @enderror" value="{{ old('twitter') }}"
+                            required>
+                        @error('twitter')
+                            <div class="alert alert-danger"> {{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="fb">Facebook</label>
+                        <input type="text" name="fb" id="fb"
+                            class="form-control @error('fb') is invalid @enderror" value="{{ old('fb') }}" required>
+                        @error('fb')
+                            <div class="alert alert-danger"> {{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="linkedin">Linkedin</label>
+                        <input type="text" name="linkedin" id="linkedin"
+                            class="form-control @error('linkedin') is invalid @enderror" value="{{ old('linkedin') }}"
+                            required>
+                        @error('linkedin')
+                            <div class="alert alert-danger"> {{ $message }}</div>
+                        @enderror
+                    </div>
                     <button type="submit" class="btn btn-primary my-4">Simpan</button>
                 </form>
             </div>

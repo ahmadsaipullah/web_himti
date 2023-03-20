@@ -27,9 +27,11 @@
             <tr class="text-center">
                 <th style="width: 2%">No</th>
                 <th class="text-uppercase">Nama</th>
+                <th>Email</th>
                 <th>Nim</th>
                 <th>No_Hp</th>
-                <th>Email</th>
+                <th>No_Darurat</th>
+                <th>Alamat</th>
                 <th>Angkatan</th>
             </tr>
         </thead>
@@ -38,9 +40,11 @@
                 <tr class="text-center">
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $anggota->nama }}</td>
+                    <td>{{ $anggota->email }}</td>
                     <td>{{ $anggota->nim }}</td>
                     <td>{{ $anggota->no_hp }}</td>
-                    <td>{{ $anggota->email }}</td>
+                    <td>{{ $anggota->no_darurat }}</td>
+                    <td>{{ $anggota->no_alamat }}</td>
                     <td>{{ $anggota->angkatan->angkatan }}</td>
                 </tr>
             @empty

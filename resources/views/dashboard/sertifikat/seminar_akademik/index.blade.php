@@ -12,7 +12,7 @@
                     <hr>
                     <a href="{{ route('sertifikat.create') }}" class="btn btn-primary">Create sertifikat</a>
                     <div class="text-right my-4">
-                        <a href="{{ route('sertifikat.pdf') }}" class="btn btn-danger">PDF</a>
+                        {{-- <a href="{{ route('sertifikat.pdf') }}" class="btn btn-danger">PDF</a> --}}
                     </div>
                 </div>
                 <div class="table-responsive">

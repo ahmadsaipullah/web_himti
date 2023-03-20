@@ -42,9 +42,13 @@ class tutorialController extends Controller
             'link' => 'required|string'
         ]);
 
-        tutorial::create($validasi);
-        alert()->success("{$validasi['judul']}", 'Berhasil Di Tambah');
-        return to_route('tutorial.index');
+        if (tutorial::create($validasi)) {
+            alert()->success("{$validasi['judul']}", 'Berhasil Di Tambah');
+            return to_route('tutorial.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -83,9 +87,13 @@ class tutorialController extends Controller
             'link' => 'required|string'
         ]);
 
-        $tutorial->update($validasi);
-        alert()->success("{$validasi['judul']}", 'Berhasil Di Update');
-        return to_route('tutorial.index');
+        if ($tutorial->update($validasi)) {
+            alert()->success("{$validasi['judul']}", 'Berhasil Di Update');
+            return to_route('tutorial.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -96,8 +104,12 @@ class tutorialController extends Controller
      */
     public function destroy(tutorial $tutorial)
     {
-        $tutorial->delete();
-        alert()->success("{$tutorial['judul']}", 'Berhasil Di Hapus');
-        return back();
+        if ($tutorial->delete()) {
+            alert()->success("{$tutorial['judul']}", 'Berhasil Di Hapus');
+            return back();
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 }

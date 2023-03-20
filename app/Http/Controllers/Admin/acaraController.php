@@ -58,11 +58,15 @@ class acaraController extends Controller
         ]);
 
         $data = $request->all();
-        $data['image'] = $request->file('image')->store('asset/acara', 'public');
+        $data['image'] = $request->file('image')->store('asset/acara', 'public');;
 
-        acara::create($data);
-        alert()->success("{$data['tittle']}", 'Berhasil Di Tambah');
-        return to_route('acara.index');
+        if (acara::create($data)) {
+            alert()->success("{$data['tittle']}", 'Berhasil Di Tambah');
+            return to_route('acara.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -105,9 +109,13 @@ class acaraController extends Controller
             $data['image'] = $request->file('image')->store('asset/acara', 'public');
         }
 
-        $dataId->update($data);
-        alert()->success("{$acara['tittle']}", 'Berhasil Di Update');
-        return to_route('acara.index');
+        if ($dataId->update($data)) {
+            alert()->success("{$acara['tittle']}", 'Berhasil Di Update');
+            return to_route('acara.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -119,8 +127,12 @@ class acaraController extends Controller
     public function destroy(acara $acara)
     {
         Storage::delete('public/' . $acara->image);
-        $acara->delete();
-        alert()->success("{$acara['tittle']}", 'Berhasil Di Hapus');
-        return back();
+        if ($acara->delete()) {
+            alert()->success("{$acara['tittle']}", 'Berhasil Di Hapus');
+            return back();
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 }

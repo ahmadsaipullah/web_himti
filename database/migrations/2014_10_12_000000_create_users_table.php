@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('no_hp');
             $table->string('password');
             $table->foreignId('id_level')->index();
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -51,9 +51,14 @@ class partnershipController extends Controller
 
         $data = $request->all();
         $data['image'] = $request->file('image')->store('asset/partnership', 'public');
-        partnership::create($data);
-        alert()->success("{$data['nama']}", 'Berhasil Di Tambah');
-        return to_route('partnership.index');
+
+        if (partnership::create($data)) {
+            alert()->success("{$data['nama']}", 'Berhasil Di Tambah');
+            return to_route('partnership.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -100,9 +105,13 @@ class partnershipController extends Controller
             $data['image'] = $request->file('image')->store('asset/partnership', 'public');
         }
 
-        $dataId->update($data);
-        alert()->success("{$data['nama']}", 'Berhasil Di Update');
-        return to_route('partnership.index');
+        if ($dataId->update($data)) {
+            alert()->success("{$data['nama']}", 'Berhasil Di Update');
+            return to_route('partnership.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -114,8 +123,12 @@ class partnershipController extends Controller
     public function destroy(partnership $partnership)
     {
         Storage::delete('public/' . $partnership->image);
-        $partnership->delete();
-        alert()->success("{$partnership['nama']}", 'Berhasil Di Hapus');
-        return back();
+        if ($partnership->delete()) {
+            alert()->success("{$partnership['nama']}", 'Berhasil Di Hapus');
+            return back();
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 }

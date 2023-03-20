@@ -62,6 +62,9 @@
 <body>
 
     <div class="container my-4 ">
+        <div class="text-right my-4">
+            <a href="{{ route('sertif-download', $sertifikat->id) }}" class="btn btn-danger">PDF</a>
+        </div>
         <div class="sertifikat">
             <div class="row">
                 <div class="col-md-12 d-flex justify-content-center">

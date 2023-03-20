@@ -13,10 +13,9 @@
 
     <style>
         body {
-            background: #ffffff url(assets/images/HIMTI.png);
-            background-repeat: no-repeat;
-            background-size: 70% 100%;
-            background-attachment: fixed;
+            background-image: url('assets/images/pattren.png');
+            background-size: cover;
+
         }
 
         .container .row .col header h1,
@@ -24,25 +23,38 @@
             color: #191970;
             text-shadow: 0 5px 5px rgba(0, 0, 0, 0.7);
         }
+
+        .row {
+            margin-top: 10px;
+        }
+
+        .img-fluid {
+            padding-top: 70px;
+        }
+
+        .border {
+            box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.6);
+        }
     </style>
 </head>
 
 <body>
     @include('sweetalert::alert')
     <div class="container">
-        <div class="row" style="margin-top: 300px;">
-            <div class="col-md-8 mt-4"></div>
-            <div class="col-md-4">
+        <div class="logo justify-content-center d-flex">
+            <img src="{{ asset('assets/images/himti.png') }}" alt="gambar" width="350px" class="img-fluid">
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4 border bg-warning">
                 @if (session()->has('LoginError'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <div class="mt-4 alert alert-danger alert-dismissible fade show" role="alert">
                         {{ session('LoginError') }}
                     </div>
                 @endif
                 <form action="{{ route('log') }}" method="POST">
                     @csrf
                     <div class="form-row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-8 mb-3 input-box">
+                        <div class="col-md-12 mb-3 mt-3 input-box">
                             <input type="email" name="email" id="email"
                                 class="form-control
                             @error('email') is invalid @enderror"
@@ -53,8 +65,7 @@
                         @enderror
                     </div>
                     <div class="form-row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-8 mb-3">
+                        <div class="col-md-12 mb-3">
                             <input type="password" name="password" id="password"
                                 class="form-control
                             @error('password') is invalid @enderror"
@@ -65,8 +76,7 @@
                         @enderror
                     </div>
                     <div class="form-row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-8 mb-3">
+                        <div class="col-md-12 mb-3">
                             <button type="submit" class="btn btn-primary">Log in</button>
                         </div>
                     </div>

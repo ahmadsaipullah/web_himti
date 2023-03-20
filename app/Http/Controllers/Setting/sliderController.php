@@ -53,6 +53,7 @@ class sliderController extends Controller
             return to_route('slider.index');
         } else {
             alert()->error('Gagal');
+            return back();
         }
     }
 
@@ -100,6 +101,7 @@ class sliderController extends Controller
             return to_route('slider.index');
         } else {
             alert()->error('Gagal');
+            return back();
         }
     }
 
@@ -117,6 +119,7 @@ class sliderController extends Controller
             return back();
         } else {
             alert()->error('Gagal');
+            return back();
         }
     }
 }

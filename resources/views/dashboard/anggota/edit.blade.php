@@ -22,6 +22,15 @@
                         @enderror
                     </div>
                     <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email"
+                            class="form-control @error('email') is invalid @enderror"
+                            value="{{ old('email') ?? $anggotum->email }}">
+                        @error('email')
+                            <div class="alert alert-danger"> {{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
                         <label for="nim">Nim</label>
                         <input type="number" name="nim" id="nim"
                             class="form-control @error('nim') is invalid @enderror"
@@ -40,11 +49,20 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" name="email" id="email"
-                            class="form-control @error('email') is invalid @enderror"
-                            value="{{ old('email') ?? $anggotum->email }}">
-                        @error('email')
+                        <label for="no_darurat">No_darurat</label>
+                        <input type="number" name="no_darurat" id="no_darurat"
+                            class="form-control @error('no_darurat') is invalid @enderror"
+                            value="{{ old('no_darurat') ?? $anggotum->no_darurat }}" minlength="11" maxlength="13">
+                        @error('no_darurat')
+                            <div class="alert alert-danger"> {{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="alamat">Alamat</label>
+                        <input type="text" name="alamat" id="alamat"
+                            class="form-control @error('alamat') is invalid @enderror"
+                            value="{{ old('alamat') ?? $anggotum->alamat }}">
+                        @error('alamat')
                             <div class="alert alert-danger"> {{ $message }}</div>
                         @enderror
                     </div>

@@ -38,7 +38,7 @@ class pendaftaranController extends Controller
         $kelompok_belajar->bidang = $request->bidang;
         $kelompok_belajar['image'] = $request->file('image')->store('asset/kelompokbelajar', 'public');
 
-        Mail::to($request->email)->send(new Kelompok_Belajar($request->nama));
+        // Mail::to($request->email)->send(new Kelompok_Belajar($request->nama));
 
         if ($kelompok_belajar->save()) {
             return redirect()->route('kb-sukses', $kelompok_belajar->id);

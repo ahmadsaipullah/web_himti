@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Alumni;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class alumniController extends Controller
@@ -12,7 +13,7 @@ class alumniController extends Controller
 
     public function __construct()
     {
-        $this->middleware('adminsuper');
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -54,9 +55,13 @@ class alumniController extends Controller
 
         $data = $request->all();
         $data['image'] = $request->file('image')->store('asset/alumni', 'public');
-        Alumni::create($data);
-        alert()->success("{$data['nama']}", 'Berhasil Di Tambah');
-        return to_route('alumni.index');
+        if (Alumni::create($data)) {
+            alert()->success("{$data['nama']}", 'Berhasil Di Tambah');
+            return to_route('alumni.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -106,9 +111,13 @@ class alumniController extends Controller
             $data['image'] = $request->file('image')->store('asset/alumni', 'public');
         }
 
-        $dataId->update($data);
-        alert()->success("{$data['nama']}", 'Berhasil Di Update');
-        return to_route('alumni.index');
+        if ($dataId->update($data)) {
+            alert()->success("{$data['nama']}", 'Berhasil Di Update');
+            return to_route('alumni.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -120,8 +129,24 @@ class alumniController extends Controller
     public function destroy(Alumni $alumnus)
     {
         Storage::delete('public/' . $alumnus->image);
-        $alumnus->delete();
-        alert()->success("{$alumnus['nama']}", 'Berhasil Di Hapus');
-        return back();
+        if ($alumnus->delete()) {
+            alert()->success("{$alumnus['nama']}", 'Berhasil Di Hapus');
+            return back();
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
+    }
+
+    public function cari(Request $request)
+    {
+        // menangkap data pencarian
+        $cari = $request->cari;
+        // mengambil data dari table pegawai sesuai pencarian data
+        $alumnis = DB::table('alumnis')
+            ->where('nama', 'like', "%" . $cari . "%")
+            ->paginate();
+        // mengirim data pegawai ke view index
+        return view('dashboard.alumni.index', compact('alumnis'));
     }
 }

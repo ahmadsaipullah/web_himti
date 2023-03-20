@@ -34,8 +34,16 @@
                                     <td>{{ $admin->no_hp }}</td>
                                     <td>{{ $admin->level->level }}</td>
                                     <td>
-                                        <img src="{{ Storage::url($admin->image) }}" alt="gambar" width="150px"
-                                            class="tumbnail img-fluid">
+
+                                        @if (Auth()->user()->image)
+                                            <img src="{{ Storage::url($admin->image) }}" alt="gambar" width="150px"
+                                                class="tumbnail img-fluid">
+                                        @else
+                                            <img alt="image" class="img-fluid tumbnail"
+                                                src="{{ asset('assets/images/user_default.png') }}" width="150px"
+                                                class="tumbnail img-fluid">
+                                        @endif
+
                                     </td>
                                     <td>
                                         <a href="{{ route('admin.edit', $admin->id) }}" class="btn btn-success btn-sm">

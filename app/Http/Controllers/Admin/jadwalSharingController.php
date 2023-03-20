@@ -61,9 +61,13 @@ class jadwalSharingController extends Controller
         $data = $request->all();
         $data['image'] = $request->file('image')->store('asset/sharing', 'public');
 
-        jadwal_sharing::create($data);
-        alert()->success("{$data['tittle']}", 'Berhasil Di Tambah');
-        return to_route('jadwal-sharing.index');
+        if (jadwal_sharing::create($data)) {
+            alert()->success("{$data['tittle']}", 'Berhasil Di Tambah');
+            return to_route('jadwal-sharing.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -106,9 +110,13 @@ class jadwalSharingController extends Controller
             $data['image'] = $request->file('image')->store('asset/sharing', 'public');
         }
 
-        $dataId->update($data);
-        alert()->success("{$data['tittle']}", 'Berhasil Di Update');
-        return to_route('jadwal-sharing.index');
+        if ($dataId->update($data)) {
+            alert()->success("{$data['tittle']}", 'Berhasil Di Update');
+            return to_route('jadwal-sharing.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -120,8 +128,12 @@ class jadwalSharingController extends Controller
     public function destroy(jadwal_sharing $jadwal_sharing)
     {
         Storage::delete('public/' . $jadwal_sharing->image);
-        $jadwal_sharing->delete();
-        alert()->success("{$jadwal_sharing['tittle']}", 'Berhasil Di Hapus');
-        return back();
+        if ($jadwal_sharing->delete()) {
+            alert()->success("{$jadwal_sharing['tittle']}", 'Berhasil Di Hapus');
+            return back();
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 }

@@ -55,9 +55,13 @@ class tambahKategoriController extends Controller
 
         ]);
 
-        kategori::create($validasi);
-        alert()->success("{$validasi['nama_kategori']}", 'Berhasil Di Tambah');
-        return to_route('kategori.index');
+        if (kategori::create($validasi)) {
+            alert()->success("{$validasi['nama_kategori']}", 'Berhasil Di Tambah');
+            return to_route('kategori.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -97,9 +101,13 @@ class tambahKategoriController extends Controller
 
         ]);
 
-        $kategori->update($validasi);
-        alert()->success("{$validasi['nama_kategori']}", 'Berhasil Di Update');
-        return to_route('kategori.index');
+        if ($kategori->update($validasi)) {
+            alert()->success("{$validasi['nama_kategori']}", 'Berhasil Di Update');
+            return to_route('kategori.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -110,9 +118,13 @@ class tambahKategoriController extends Controller
      */
     public function destroy(kategori $kategori)
     {
-        $kategori->delete();
-        alert()->success("{$kategori['nama_kategori']}", 'Berhasil Di Hapus');
-        return back();
+        if ($kategori->delete()) {
+            alert()->success("{$kategori['nama_kategori']}", 'Berhasil Di Hapus');
+            return back();
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
 

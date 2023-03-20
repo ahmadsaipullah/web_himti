@@ -96,9 +96,13 @@ class sertifikatAdminController extends Controller
 
         ]);
 
-        $sertifikat->update($validasi);
-        alert()->success("{$validasi['nama_peserta']}", 'Berhasil Di Tambah');
-        return to_route('sertifikat.index');
+        if ($sertifikat->update($validasi)) {
+            alert()->success("{$validasi['nama_peserta']}", 'Berhasil Di Tambah');
+            return to_route('sertifikat.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -109,15 +113,25 @@ class sertifikatAdminController extends Controller
      */
     public function destroy(sertifikat $sertifikat)
     {
-        $sertifikat->delete();
-        alert()->success("{$sertifikat['nama_peserta']}", 'Berhasil Di Hapus');
-        return back();
+        if ($sertifikat->delete()) {
+            alert()->success("{$sertifikat['nama_peserta']}", 'Berhasil Di Hapus');
+            return back();
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
-    public function pdf()
+    public function pdf($id)
     {
-        $sertifikats = sertifikat::all();
-        $pdf = PDF::loadview('dashboard.sertifikat.seminar_akademik.cetak_sertifikat', compact('sertifikats'))->setPaper('A1', 'landscape');
+        // $ser = request()->id;
+        // $sertifikats = sertifikat::firstwhere('id', $ser);
+        $sertifikat = sertifikat::where('id', $id)->first();
+        set_time_limit(300); // Extends to 5 minutes.
+
+        $pdf = PDF::loadview('dashboard.sertifikat.seminar_akademik.cetak', compact('sertifikat'))->setPaper('A4', 'landscape');
+        // $pdf = PDF::loadview('dashboard.sertifikat.seminar_akademik.cetak_sertifikat', compact('sertifikat'))->setPaper('A1', 'landscape');
+        // dd($pdf);
         return $pdf->download('Sertifikat.pdf');
     }
 }

@@ -48,9 +48,13 @@ class tambahAngkatanController extends Controller
             'angkatan' => 'required|max:4|unique:angkatans'
         ]);
 
-        angkatan::create($validasi);
-        alert()->success("{$validasi['angkatan']}", 'Berhasil Di Tambah');
-        return to_route('angkatan.index');
+        if (angkatan::create($validasi)) {
+            alert()->success("{$validasi['angkatan']}", 'Berhasil Di Tambah');
+            return to_route('angkatan.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -89,9 +93,13 @@ class tambahAngkatanController extends Controller
             'angkatan' => 'required|max:4|unique:angkatans,angkatan,' . $angkatan->id
         ]);
 
-        $angkatan->update($validasi);
-        alert()->success("{$validasi['angkatan']}", 'Berhasil Di Update');
-        return to_route('angkatan.index');
+        if ($angkatan->update($validasi)) {
+            alert()->success("{$validasi['angkatan']}", 'Berhasil Di Update');
+            return to_route('angkatan.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -102,8 +110,12 @@ class tambahAngkatanController extends Controller
      */
     public function destroy(angkatan $angkatan)
     {
-        $angkatan->delete();
-        alert()->success("{$angkatan['angkatan']}", 'Berhasil Di Hapus');
-        return back();
+        if ($angkatan->delete()) {
+            alert()->success("{$angkatan['angkatan']}", 'Berhasil Di Hapus');
+            return back();
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 }

@@ -113,10 +113,10 @@
                                             </div>
                                             <div class="col-md-2" data-aos="zoom-in" data-aos-delay="200"></div>
                                             <div class="social">
-                                                <a href=""><i class="icofont-twitter"></i></a>
-                                                <a href=""><i class="icofont-facebook"></i></a>
-                                                <a href=""><i class="icofont-instagram"></i></a>
-                                                <a href=""><i class="icofont-linkedin"></i></a>
+                                                <a href="{{ $about1->twitter }}"><i class="icofont-twitter"></i></a>
+                                                <a href="{{ $about1->fb }}"><i class="icofont-facebook"></i></a>
+                                                <a href="{{ $about1->ig }}"><i class="icofont-instagram"></i></a>
+                                                <a href="{{ $about1->linkedin }}"><i class="icofont-linkedin"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -132,10 +132,10 @@
                                                 <span>{{ $about1->jabatan }}</span>
                                             </div>
                                             <div class="social">
-                                                <a href=""><i class="icofont-twitter"></i></a>
-                                                <a href=""><i class="icofont-facebook"></i></a>
-                                                <a href=""><i class="icofont-instagram"></i></a>
-                                                <a href=""><i class="icofont-linkedin"></i></a>
+                                                <a href="{{ $about1->twitter }}"><i class="icofont-twitter"></i></a>
+                                                <a href="{{ $about1->fb }}"><i class="icofont-facebook"></i></a>
+                                                <a href="{{ $about1->ig }}"><i class="icofont-instagram"></i></a>
+                                                <a href="{{ $about1->linkedin }}"><i class="icofont-linkedin"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -159,11 +159,8 @@
                                     class="icofont-simple-up"></i></a>
                             <div id="faq1" class="collapse show">
                                 <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. At odit quaerat labore, magnam
-                                    aliquid ea
-                                    aliquam, sed, accusantium est mollitia magni aperiam et doloribus similique ratione
-                                    rerum beatae quos
-                                    explicabo?
+                                    Menjadikan organisasi yang melahirkan anggota profesional dalam bidang informatika dan
+                                    teknologi informasi serta menjunjung tinggi nilai-nilai organisasi.
                                 </p>
                             </div>
                         </li>
@@ -171,13 +168,15 @@
                             <a data-toggle="collapse" href="#faq2" class="collapsed">Misi<i
                                     class="icofont-simple-up"></i></a>
                             <div id="faq2" class="collapse">
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet similique et ad, quas vero
-                                    nulla
-                                    repellendus dignissimos omnis. Vero officia praesentium autem dolore natus sit unde
-                                    molestias qui
-                                    inventore architecto!
+                                <p>1. Menyelenggarakan dan mengembangkan potensi anggota HIMTI dalam bidang teknologi
+                                    informasi.
                                 </p>
+                                <p>2. Membentuk sumber daya manusia yang memiliki integritas, profesional dan kompeten dalam
+                                    bidang teknologi informasi.</p>
+                                <p>3. Menjalin relasi antara pihak internal dan eksternal kampus.</p>
+                                <p>4. Melakukan penelitian dan pengembangan dalam bidang teknologi informasi.</p>
+                                <p>5. Menghasilkan karya yang bermanfaat di dalam bidang teknologi informasi dilingkungan
+                                    masyarakat.</p>
                             </div>
                         </li>
                     </ul>

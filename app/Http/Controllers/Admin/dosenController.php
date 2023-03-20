@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use PDF;
 use App\Models\dosen;
+use App\Exports\DosenExport;
+use App\Imports\dosenImport;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\DosenExport;
 
 
 class dosenController extends Controller
@@ -55,9 +57,13 @@ class dosenController extends Controller
 
         ]);
 
-        dosen::create($validasi);
-        alert()->success("{$validasi['nama']}", 'Berhasil Di Tambah');
-        return to_route('dosen.index');
+        if (dosen::create($validasi)) {
+            alert()->success("{$validasi['nama']}", 'Berhasil Di Tambah');
+            return to_route('dosen.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -100,9 +106,13 @@ class dosenController extends Controller
 
         ]);
 
-        $dosen->update($validasi);
-        alert()->success("{$validasi['nama']}", 'Berhasil Di Update');
-        return to_route('dosen.index');
+        if ($dosen->update($validasi)) {
+            alert()->success("{$validasi['nama']}", 'Berhasil Di Update');
+            return to_route('dosen.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -113,9 +123,13 @@ class dosenController extends Controller
      */
     public function destroy(dosen $dosen)
     {
-        $dosen->delete();
-        alert()->success("{$dosen['nama']}", 'Berhasil Di Hapus');
-        return back();
+        if ($dosen->delete()) {
+            alert()->success("{$dosen['nama']}", 'Berhasil Di Hapus');
+            return back();
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
 
@@ -128,5 +142,29 @@ class dosenController extends Controller
     public function excel()
     {
         return Excel::download(new DosenExport, 'Data-Dosen.xlsx');
+    }
+
+    public function cari(Request $request)
+    {
+        // menangkap data pencarian
+        $cari = $request->cari;
+        // mengambil data dari table pegawai sesuai pencarian data
+        $dosens = DB::table('dosens')
+            ->where('nama', 'like', "%" . $cari . "%")
+            ->paginate();
+        // mengirim data pegawai ke view index
+        return view('dashboard.dosen.index', compact('dosens'));
+    }
+
+    public function importdosen(Request $request)
+    {
+        Excel::import(new dosenImport, $request->file('dosen')->store('dosen'));
+        alert()->success('Berhasil');
+        return back();
+    }
+
+    public function datadosen()
+    {
+        return view('dashboard.dosen.import');
     }
 }

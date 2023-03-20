@@ -53,6 +53,10 @@ class strukturalController extends Controller
             'jabatan' => 'required|string|unique:struktur_organs',
             'status' => 'required|string',
             'image' => 'image|required',
+            'ig' => 'required|string|unique:struktur_organs',
+            'twitter' => 'required|string|unique:struktur_organs',
+            'fb' => 'required|string|unique:struktur_organs',
+            'linkedin' => 'required|string|unique:struktur_organs',
             'id_angkatan' => ''
 
 
@@ -60,9 +64,14 @@ class strukturalController extends Controller
 
         $data = $request->all();
         $data['image'] = $request->file('image')->store('asset/struktural', 'public');
-        struktur_organ::create($data);
-        alert()->success("{$data['nama']}", 'Berhasil Di Tambah');
-        return to_route('struktural.index');
+
+        if (struktur_organ::create($data)) {
+            alert()->success("{$data['nama']}", 'Berhasil Di Tambah');
+            return to_route('struktural.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -102,23 +111,32 @@ class strukturalController extends Controller
 
             'nama' => 'required|string',
             'nim' => 'required|min:10|max:10|string|unique:struktur_organs,nim,' . $struktural->id,
-            'jabatan' =>  'string|required|unique:struktur_organs,nim,' . $struktural->id,
+            'jabatan' =>  'string|required|unique:struktur_organs,jabatan,' . $struktural->id,
             'status' => 'string|required',
             'image' => 'required|image',
+            'ig' => 'required|string|unique:struktur_organs,ig,' . $struktural->id,
+            'twitter' => 'required|string|unique:struktur_organs,twitter,' . $struktural->id,
+            'fb' => 'required|string|unique:struktur_organs,fb,' . $struktural->id,
+            'linkedin' => 'required|string|unique:struktur_organs,linkedin,' . $struktural->id,
             'id_angkatan' => ''
 
         ]);
 
         $dataId = $struktural->find($struktural->id);
         $data = $request->all();
+
         if ($request->image) {
             Storage::delete('public/' . $dataId->image);
             $data['image'] = $request->file('image')->store('asset/struktural', 'public');
         }
 
-        $dataId->update($data);
-        alert()->success("{$data['nama']}", 'Berhasil Di Update');
-        return to_route('struktural.index');
+        if ($dataId->update($data)) {
+            alert()->success("{$data['nama']}", 'Berhasil Di Update');
+            return to_route('struktural.index');
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 
     /**
@@ -130,8 +148,12 @@ class strukturalController extends Controller
     public function destroy(struktur_organ $struktural)
     {
         Storage::delete('public/' . $struktural->image);
-        $struktural->delete();
-        alert()->success("{$struktural['nama']}", 'Berhasil Di Hapus');
-        return back();
+        if ($struktural->delete()) {
+            alert()->success("{$struktural['nama']}", 'Berhasil Di Hapus');
+            return back();
+        } else {
+            alert()->error('Gagal');
+            return back();
+        }
     }
 }
